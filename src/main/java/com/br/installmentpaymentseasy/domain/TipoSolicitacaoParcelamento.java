@@ -1,8 +1,6 @@
 package com.br.installmentpaymentseasy.domain;
 
-import com.br.installmentpaymentseasy.service.MotorCalculoParcelaJurosSimples;
-import com.br.installmentpaymentseasy.service.MotorCalculoParcelaSimples;
-import com.br.installmentpaymentseasy.service.MotorCalculoService;
+import org.apache.coyote.BadRequestException;
 
 import java.util.Optional;
 
@@ -16,14 +14,14 @@ public enum TipoSolicitacaoParcelamento {
         this.tipoSolicitacaoParcelamento = tipoSolicitacaoParcelamento;
     }
 
-    public static TipoSolicitacaoParcelamento getTipoSolicitacaoParcelamento(String tipoSolicitacaoParcelamento) {
+    public static TipoSolicitacaoParcelamento getTipoSolicitacaoParcelamento(String tipoSolicitacaoParcelamento) throws BadRequestException {
         Optional<TipoSolicitacaoParcelamento> tipoSolicitacaoParcelamentoOptional = Optional.ofNullable(null);
         for (TipoSolicitacaoParcelamento tipoSolicitacaoParcelamentoEnum : TipoSolicitacaoParcelamento.values()) {
             if (tipoSolicitacaoParcelamentoEnum.tipoSolicitacaoParcelamento.equals(tipoSolicitacaoParcelamento)) {
                 tipoSolicitacaoParcelamentoOptional = Optional.of(tipoSolicitacaoParcelamentoEnum);
             }
         }
-        return tipoSolicitacaoParcelamentoOptional.orElseThrow(() -> new IllegalArgumentException("Tipo de solicitação de parcelamento não encontrado"));
+        return tipoSolicitacaoParcelamentoOptional.orElseThrow(() -> new BadRequestException("Tipo de solicitação de parcelamento não encontrado"));
     }
 
 }
