@@ -1,6 +1,7 @@
 package com.br.installmentpaymentseasy.dto;
 
 
+import com.br.installmentpaymentseasy.domain.TipoSolicitacaoParcelamento;
 import jakarta.validation.constraints.NotNull;
 
 

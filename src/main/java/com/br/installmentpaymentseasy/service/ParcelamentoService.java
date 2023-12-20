@@ -12,10 +12,11 @@ import java.util.List;
 public class ParcelamentoService {
 
     public List<ParcelamentoCalculado> calcularParcelas(SolicitacaoParcelamento solicitacaoParcelamento) {
-        var motorCalculo = TipoSolicitacaoParcelamento.getMotorCalculo(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
-        if (motorCalculo == null) {
-            throw new IllegalArgumentException("Tipo de solicitação de parcelamento inválida");
-        }
+        TipoSolicitacaoParcelamento tipoSolicitacaoParcelamento = TipoSolicitacaoParcelamento.getTipoSolicitacaoParcelamento(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
+        var motorCalculo = switch (tipoSolicitacaoParcelamento) {
+            case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
+            case PARCELAMENTO_COM_JUROS_SIMPLES -> new MotorCalculoParcelaJurosSimples();
+        };
         List<ParcelamentoCalculado> listParcelamento = new ArrayList<>();
         for (int num = 1; num < solicitacaoParcelamento.maxParcelas() + 1; num++) {
             listParcelamento.add(motorCalculo.realizaCalculoIndividual(solicitacaoParcelamento.valor(), num, solicitacaoParcelamento.juros()));
