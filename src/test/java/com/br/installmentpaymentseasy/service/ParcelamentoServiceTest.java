@@ -11,7 +11,7 @@ public class ParcelamentoServiceTest {
 
     @Test
     public void testCalcularParcelas() {
-        SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.41, 12);
+        SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.41, 12, "SEM_JUROS", 0.00);
         ParcelamentoService parcelamentoService = new ParcelamentoService();
         List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
 
