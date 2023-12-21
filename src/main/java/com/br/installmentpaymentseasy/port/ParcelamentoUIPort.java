@@ -6,6 +6,7 @@ import com.br.installmentpaymentseasy.dto.SolicitacaoParcelamentoPersonalizado;
 import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
