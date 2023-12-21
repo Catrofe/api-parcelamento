@@ -14,12 +14,7 @@ import java.util.List;
 public class ParcelamentoService {
 
     public List<ParcelamentoCalculado> calcularParcelas(SolicitacaoParcelamento solicitacaoParcelamento) throws BadRequestException {
-        TipoSolicitacaoParcelamento tipoSolicitacaoParcelamento = TipoSolicitacaoParcelamento.getTipoSolicitacaoParcelamento(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
-        var motorCalculo = switch (tipoSolicitacaoParcelamento) {
-            case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
-            case PARCELAMENTO_COM_JUROS_SIMPLES -> new MotorCalculoParcelaJurosSimples();
-            case PARCELAMENTO_COM_JUROS_COMPOSTO -> new MotorCalculoParcelaJurosComposto();
-        };
+        var motorCalculo = getMotorCalculoFactory(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
         List<ParcelamentoCalculado> listParcelamento = new ArrayList<>();
         for (int num = 1; num < solicitacaoParcelamento.maxParcelas() + 1; num++) {
             listParcelamento.add(motorCalculo.realizaCalculoIndividual(solicitacaoParcelamento.valor(), num, solicitacaoParcelamento.juros()));
@@ -28,17 +23,21 @@ public class ParcelamentoService {
     }
 
     public List<ParcelamentoCalculado> calcularParcelasPersonalizado(SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException {
-        TipoSolicitacaoParcelamento tipoSolicitacaoParcelamento = TipoSolicitacaoParcelamento.getTipoSolicitacaoParcelamento(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
-        var motorCalculo = switch (tipoSolicitacaoParcelamento) {
-            case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
-            case PARCELAMENTO_COM_JUROS_SIMPLES -> new MotorCalculoParcelaJurosSimples();
-            case PARCELAMENTO_COM_JUROS_COMPOSTO -> new MotorCalculoParcelaJurosComposto();
-        };
+        var motorCalculo = getMotorCalculoFactory(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
         List<ParcelamentoCalculado> listParcelamento = new ArrayList<>();
         for (int num = 1; num < solicitacaoParcelamento.maxParcelas() + 1; num++) {
             listParcelamento.add(motorCalculo.realizaCalculoIndividualPersonalizado(solicitacaoParcelamento.valor(), num, solicitacaoParcelamento.juros(), solicitacaoParcelamento.personalizarAposQuantidadeParcelas(), solicitacaoParcelamento.divisaoSimples()));
         }
         return listParcelamento;
+    }
+
+    private MotorCalculoFactory getMotorCalculoFactory(String tipoParcelamento) throws BadRequestException {
+        TipoSolicitacaoParcelamento tipoSolicitacaoParcelamento = TipoSolicitacaoParcelamento.getTipoSolicitacaoParcelamento(tipoParcelamento);
+        return switch (tipoSolicitacaoParcelamento) {
+            case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
+            case PARCELAMENTO_COM_JUROS_SIMPLES -> new MotorCalculoParcelaJurosSimples();
+            case PARCELAMENTO_COM_JUROS_COMPOSTO -> new MotorCalculoParcelaJurosComposto();
+        };
     }
 
 
