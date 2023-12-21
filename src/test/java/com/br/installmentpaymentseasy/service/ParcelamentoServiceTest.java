@@ -55,4 +55,17 @@ public class ParcelamentoServiceTest {
         ParcelamentoService parcelamentoService = new ParcelamentoService();
         Assertions.assertThrows(BadRequestException.class, () -> parcelamentoService.calcularParcelas(solicitacaoParcelamento));
     }
+
+    @Test
+    public void testCalculaParcelasComJurosComposto() throws BadRequestException {
+        SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.00, 12, "COM_JUROS_COMPOSTO", 2.35);
+        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
+
+        Assertions.assertEquals(12, parcelamento.size());
+        Assertions.assertEquals(16.5, parcelamento.get(11).valorPrimeiraParcela());
+        Assertions.assertEquals(16.52, parcelamento.get(11).valorDemaisParcela());
+        Assertions.assertEquals(198.22, parcelamento.get(11).valorTotal());
+        Assertions.assertEquals(12, parcelamento.get(11).quantidadeParcelas());
+    }
 }
