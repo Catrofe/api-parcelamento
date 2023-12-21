@@ -6,7 +6,8 @@ import java.util.Optional;
 
 public enum TipoSolicitacaoParcelamento {
     PARCELAMENTO_SEM_JUROS("SEM_JUROS"),
-    PARCELAMENTO_COM_JUROS_SIMPLES("COM_JUROS_SIMPLES");
+    PARCELAMENTO_COM_JUROS_SIMPLES("COM_JUROS_SIMPLES"),
+    PARCELAMENTO_COM_JUROS_COMPOSTO("COM_JUROS_COMPOSTO");
 
     private final String tipoSolicitacaoParcelamento;
 

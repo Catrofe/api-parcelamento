@@ -17,6 +17,7 @@ public class ParcelamentoService {
         var motorCalculo = switch (tipoSolicitacaoParcelamento) {
             case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
             case PARCELAMENTO_COM_JUROS_SIMPLES -> new MotorCalculoParcelaJurosSimples();
+            case PARCELAMENTO_COM_JUROS_COMPOSTO -> new MotorCalculoParcelaJurosComposto();
         };
         List<ParcelamentoCalculado> listParcelamento = new ArrayList<>();
         for (int num = 1; num < solicitacaoParcelamento.maxParcelas() + 1; num++) {
