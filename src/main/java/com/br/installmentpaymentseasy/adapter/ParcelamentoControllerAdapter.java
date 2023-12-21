@@ -4,7 +4,7 @@ import com.br.installmentpaymentseasy.dto.ParcelamentoCalculado;
 import com.br.installmentpaymentseasy.dto.SolicitacaoParcelamento;
 import com.br.installmentpaymentseasy.dto.SolicitacaoParcelamentoPersonalizado;
 import com.br.installmentpaymentseasy.port.ParcelamentoUIPort;
-import com.br.installmentpaymentseasy.service.ParcelamentoServiceImpl;
+import com.br.installmentpaymentseasy.service.ParcelamentoService;
 import jakarta.validation.Valid;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import java.util.List;
 public class ParcelamentoControllerAdapter implements ParcelamentoUIPort {
 
     @Autowired
-    private ParcelamentoServiceImpl parcelamentoService;
+    private ParcelamentoService parcelamentoService;
 
     @Override
     public ResponseEntity<List<ParcelamentoCalculado>> calcularParcelas(@RequestBody @Valid SolicitacaoParcelamento solicitacaoParcelamento) throws BadRequestException {
