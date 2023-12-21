@@ -17,4 +17,13 @@ public class MotorCalculoParcelaSimples implements MotorCalculoService{
     public Double truncaValor(Double valor) {
         return Math.round(valor * 100.0)/100.0;
     }
+
+    @Override
+    public ParcelamentoCalculado realizaCalculoIndividualPersonalizado(double valorTotal, int quantidadeParcelas, double juros, int personalizarAposQuantidadeParcelas, Boolean divisaoSimples) {
+        if (!divisaoSimples) {
+            return this.realizaCalculoIndividual(valorTotal, quantidadeParcelas, juros);
+        }
+        Double valorParcelaArredondado = this.truncaValor(valorTotal / quantidadeParcelas);
+        return new ParcelamentoCalculado(valorTotal, valorParcelaArredondado, valorParcelaArredondado, quantidadeParcelas);
+    }
 }
