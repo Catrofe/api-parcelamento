@@ -60,3 +60,22 @@ Bom, durante a escrita dessa documentação fiquei pensativo sobre e talvez abst
 Agora pensando melhor faria mais sentido ter uma classe e não uma interface, onde minhas demais classes vão extender, usar o que precisam e implementar quando precisarem novos metodos. Dito isso estarei iniciando meu refactor. 
 
 Vou deixar registrado aqui meu ultimo commit antes da refatoração para fins de estudos: https://github.com/Catrofe/api-parcelamento/tree/e1622a2e469b3f15ac5f57a0229475969aef5e74
+
+
+#### Finalmente o padrão Factory
+
+Bom, após entender o erro que cometi fiz algumas modificações, em vez de uma interface eu implementei uma classe abstrata. Ai vem o **"Por que?"**
+
+Básicamente faria mais sentido para minha aplicação visto que algumas funções são compartilhadas entre elas e antes estavam sendo repetidas em todas as funções. Agora não mais.
+
+Alem disso eu ainda consegui fazer com que minhas demais classes implementassem ainda minhas funções obrigatórias mantendo algo parecido como o comportamento da interface. Atendendo as necessidades da minha demanda, mantendo o código mais limpo.
+
+
+### Encerramento
+
+Chegamos ao final, fiz um resumo dos meu aprendizados aqui, sem medo de expor minhas dificuldades, dúvidas nem nada. O importante é o progresso que venho buscando ao criar meus projetos.
+Se leu até aqui, obrigado e fique a vontade para deixar Issues com sugestões, ou ensinamentos. Ficarei muito grato.
+
+Esse projeto inclusive surgiu devido a uma Issue do meu projeto Watch-Recommendation, ainda não consegui implementar tudo lá, porem consegui uma parte e pretendo continuar correndo atrás para me desenvolver cada vez mais.
+
+Vllw Pessoal ❤
