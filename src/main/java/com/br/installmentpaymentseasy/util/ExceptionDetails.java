@@ -4,7 +4,6 @@ public record ExceptionDetails(
         String timestamp,
         int status,
         String error,
-        String message,
-        String path
+        String message
 ) {
 }

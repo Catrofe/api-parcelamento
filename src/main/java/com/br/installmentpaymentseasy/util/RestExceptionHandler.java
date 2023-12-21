@@ -17,8 +17,7 @@ public class RestExceptionHandler {
                 exception.getMessage(),
                 400,
                 "Bad Request",
-                exception.getMessage(),
-                "/api/parcelamento"));
+                exception.getMessage()));
     }
 
 }
