@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-public class ParcelamentoServiceTest {
+public class ParcelamentoServiceImplTest {
 
     @Test
     public void testCalcularParcelas() throws BadRequestException {
         SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.41, 12, "SEM_JUROS", 0.00);
-        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        ParcelamentoServiceImpl parcelamentoService = new ParcelamentoServiceImpl();
         List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
 
         Assertions.assertEquals(12, parcelamento.size());
@@ -26,7 +26,7 @@ public class ParcelamentoServiceTest {
     @Test
     public void testCalculaParcelasComJurosSimples() throws BadRequestException {
         SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.00, 12, "COM_JUROS_SIMPLES", 27.67);
-        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        ParcelamentoServiceImpl parcelamentoService = new ParcelamentoServiceImpl();
         List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
 
         Assertions.assertEquals(12, parcelamento.size());
@@ -39,7 +39,7 @@ public class ParcelamentoServiceTest {
     @Test
     public void testCalculaParcelasComJurosSimplesNegativo() throws BadRequestException {
         SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.00, 12, "COM_JUROS_SIMPLES", -27.67);
-        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        ParcelamentoServiceImpl parcelamentoService = new ParcelamentoServiceImpl();
         List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
 
         Assertions.assertEquals(12, parcelamento.size());
@@ -52,14 +52,14 @@ public class ParcelamentoServiceTest {
     @Test
     public void testErroAoConsultarTipoSolicitacaoParcelamento() {
         SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.00, 12, "s", 27.67);
-        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        ParcelamentoServiceImpl parcelamentoService = new ParcelamentoServiceImpl();
         Assertions.assertThrows(BadRequestException.class, () -> parcelamentoService.calcularParcelas(solicitacaoParcelamento));
     }
 
     @Test
     public void testCalculaParcelasComJurosComposto() throws BadRequestException {
         SolicitacaoParcelamento solicitacaoParcelamento = new SolicitacaoParcelamento(150.00, 12, "COM_JUROS_COMPOSTO", 2.35);
-        ParcelamentoService parcelamentoService = new ParcelamentoService();
+        ParcelamentoServiceImpl parcelamentoService = new ParcelamentoServiceImpl();
         List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
 
         Assertions.assertEquals(12, parcelamento.size());
