@@ -10,5 +10,5 @@ import java.util.List;
 public interface ParcelamentoService {
     public List<ParcelamentoCalculado> calcularParcelas(SolicitacaoParcelamento solicitacaoParcelamento) throws BadRequestException;
 
-    public List<ParcelamentoCalculado> calcularParcelas(SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException;
+    public List<ParcelamentoCalculado> calcularParcelasPersonalizado(SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException;
 }

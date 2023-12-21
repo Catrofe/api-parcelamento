@@ -28,7 +28,7 @@ public class ParcelamentoServiceImpl implements ParcelamentoService{
     }
 
     @Override
-    public List<ParcelamentoCalculado> calcularParcelas(SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException {
+    public List<ParcelamentoCalculado> calcularParcelasPersonalizado(SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException {
         TipoSolicitacaoParcelamento tipoSolicitacaoParcelamento = TipoSolicitacaoParcelamento.getTipoSolicitacaoParcelamento(solicitacaoParcelamento.tipoSolicitacaoParcelamento());
         var motorCalculo = switch (tipoSolicitacaoParcelamento) {
             case PARCELAMENTO_SEM_JUROS -> new MotorCalculoParcelaSimples();
@@ -37,7 +37,7 @@ public class ParcelamentoServiceImpl implements ParcelamentoService{
         };
         List<ParcelamentoCalculado> listParcelamento = new ArrayList<>();
         for (int num = 1; num < solicitacaoParcelamento.maxParcelas() + 1; num++) {
-            listParcelamento.add(motorCalculo.realizaCalculoIndividual(solicitacaoParcelamento.valor(), num, solicitacaoParcelamento.juros()));
+            listParcelamento.add(motorCalculo.realizaCalculoIndividualPersonalizado(solicitacaoParcelamento.valor(), num, solicitacaoParcelamento.juros(), solicitacaoParcelamento.personalizarAposQuantidadeParcelas(), solicitacaoParcelamento.divisaoSimples()));
         }
         return listParcelamento;
     }

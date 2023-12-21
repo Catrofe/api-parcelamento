@@ -7,7 +7,7 @@ public record SolicitacaoParcelamentoPersonalizado(
         @NotNull Integer maxParcelas,
         @NotNull String tipoSolicitacaoParcelamento,
         @NotNull Double juros,
-        @NotNull Integer minParcelasPersonalizadas,
+        @NotNull Integer personalizarAposQuantidadeParcelas,
         @NotNull Boolean divisaoSimples
 ) {
 

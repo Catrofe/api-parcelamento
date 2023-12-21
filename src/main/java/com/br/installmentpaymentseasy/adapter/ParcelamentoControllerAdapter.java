@@ -31,7 +31,7 @@ public class ParcelamentoControllerAdapter implements ParcelamentoUIPort {
 
     @Override
     public ResponseEntity<List<ParcelamentoCalculado>> calcularParcelasPersonalizadas(@RequestBody @Valid SolicitacaoParcelamentoPersonalizado solicitacaoParcelamento) throws BadRequestException {
-        List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelas(solicitacaoParcelamento);
+        List<ParcelamentoCalculado> parcelamento =  parcelamentoService.calcularParcelasPersonalizado(solicitacaoParcelamento);
         return new ResponseEntity<>(parcelamento, HttpStatus.OK);
     }
 

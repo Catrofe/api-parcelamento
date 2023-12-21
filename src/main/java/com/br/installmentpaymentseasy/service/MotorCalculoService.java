@@ -8,5 +8,7 @@ public interface MotorCalculoService {
 
     Double truncaValor(Double valor);
 
+    ParcelamentoCalculado realizaCalculoIndividualPersonalizado(double valorTotal, int quantidadeParcelas, double juros, int personalizarAposQuantidadeParcelas, Boolean divisaoSimples);
+
 
 }
